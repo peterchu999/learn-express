@@ -1,6 +1,6 @@
-#Note throughout the lesson
+# Note throughout the lesson
 
-#Route
+## Route
 every route will be listed by 
 ```sh 
 app.get('\[route name\]', (req, res) => {
@@ -24,7 +24,7 @@ app.get('*', (req, res) => {
 })
 ```
 
-#EJS
+## EJS
 
 ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was use to support embeed JS in html File.
 
