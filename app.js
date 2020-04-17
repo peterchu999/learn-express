@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 
 app.get('/greet/:name', (req, res) => {
     const {name} = req.params
-    res.render('greet.ejs',{name:name})
+    res.render('greet.ejs',{name: name})
 })
 
 app.listen(port, () => {
