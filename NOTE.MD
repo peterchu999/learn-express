@@ -24,6 +24,14 @@ app.get('*', (req, res) => {
 })
 ```
 
+if you want to return html, you can have a greet help by using ejs. the way to return response is by ``` res.render('[filename].ejs') ``` the render function will find the file wihtin the ```views/``` folder. example :
+
+```sh
+app.get('/', (req, res) => {
+    res.render('greet.ejs')
+})
+```
+
 ## EJS
 
 ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was use to support embeed JS in html File.
