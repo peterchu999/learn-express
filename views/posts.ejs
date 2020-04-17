@@ -1,0 +1,10 @@
+<h1>The Posts</h1>
+
+<% posts.forEach( item => {%>
+    <li>
+        <%= item.title %> - 
+        <strong>
+            <%= item.author %>
+        </strong>
+    </li>
+<% }) %>

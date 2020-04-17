@@ -53,3 +53,18 @@ ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was
 <% } %>
  ```
 
+ ### looping
+
+ Just like usual looping in javascript we can user ```for ``` loop or ```forEach```. the syntax at ejs was quite the same like conditional. example :
+
+```sh
+<% posts.forEach( item => {%>
+    <li>
+        <%= item.title %> - 
+        <strong>
+            <%= item.author %>
+        </strong>
+    </li>
+<% }) %>
+ ```
+

@@ -11,6 +11,15 @@ app.get('/greet/:name', (req, res) => {
     res.render('greet.ejs',{name: name})
 })
 
+app.get('/posts', (req, res) => {
+    var posts = [
+        { title: 'My Post', author: 'Peter' },
+        { title: 'Future Daily', author: 'World' },
+        { title: 'Dementia', author: 'WHO' },
+    ]
+    res.render('posts.ejs', {posts: posts})
+})
+
 app.listen(port, () => {
     console.log(`server is starting at port ${port}`)
 })
