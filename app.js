@@ -1,17 +1,16 @@
 const express = require('express')
 const app = express()
 const port = 3000
+
 app.get('/', (req, res) => {
-    res.send('Hi there!')
+    res.render('home.ejs')
 })
 
-app.get('/req/:subdirect', (req, res) => {
-    const {subdirect} = req.params
-    res.send(`you're on sub of req which is ${subdirect}`)
+app.get('/greet/:name', (req, res) => {
+    const {name} = req.params
+    res.render('greet.ejs',{name:name})
 })
 
-app.get("*", (req, res) => {
-    res.send("404 Not Found")
+app.listen(port, () => {
+    console.log(`server is starting at port ${port}`)
 })
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
