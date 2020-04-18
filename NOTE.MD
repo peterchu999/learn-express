@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 ## EJS
 
-ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was use to support embeed JS in html File.
+ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was use to support embeed JS when rendering html file. it works like blade in laravel
 
 
 ### Basic printing
@@ -46,7 +46,7 @@ ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was
  EJS support to embed javascript ```if``` to the ejs. it's the same as printing but remeber to delete the ```=``` sign. and produce like this example :
 
  ```sh
-<% if(* arguments *) { %>
+<% if(*arguments*) { %>
     <p>true</p>
 <% } else { %>
     <p>false</p>
