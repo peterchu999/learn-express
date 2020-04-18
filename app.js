@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const port = 3000
+const axios = require('axios')
 const friendList = ['example']
 
 app.use(express.static('public'))
@@ -35,6 +36,17 @@ app.post('/friends', (req, res) => {
     const {friend} = req.body
     friendList.push(friend)
     res.redirect('/friends')
+})
+
+app.get('/movie/:name', async (req, res) => {
+    const {name} = req.params
+    let {data} =  await axios.get(`https://jsonplaceholder.typicode.com/${name}`)
+    let view = ""
+    data.forEach(element => {
+        view += `<li>${element.title}</li>`
+    });
+    console.log(view)
+    res.send(view)
 })
 
 app.listen(port, () => {
