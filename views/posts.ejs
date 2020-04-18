@@ -1,10 +1,14 @@
-<h1>The Posts</h1>
+<%- include('partials/header.ejs') %>
 
-<% posts.forEach( item => {%>
-    <li>
-        <%= item.title %> - 
-        <strong>
-            <%= item.author %>
-        </strong>
-    </li>
-<% }) %>
+    <h1>The Posts</h1>
+
+    <% posts.forEach( item => {%>
+        <li>
+            <%= item.title %> - 
+            <strong>
+                <%= item.author %>
+            </strong>
+        </li>
+    <% }) %>
+
+<%- include('partials/footer.ejs') %>

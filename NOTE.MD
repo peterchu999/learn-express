@@ -1,6 +1,29 @@
 # Note throughout the lesson
 
-## Route
+
+## Express app.js Configure
+the thing we can configure in app.js within our apps
+
+### Static File
+To use a folder of static file like assets, css, html, or even js we need to let our apps know which folder that contain our asset. tpo include the folder we can do like this example syntax :
+```sh
+app.use(express.static('[name of the folder]'))
+```
+
+so later on we could call our file in ejs like usally by link. here is the example
+
+```sh
+<link rel="stylesheet/css" href="[file name]"/>
+```
+
+### Set View Engine in our express
+we can set our view engine within the app so we dont need to set write our file extension when render. all we need is this chunck of code
+
+```sh
+app.set('view engine','[view engine name (in this case : "ejs")]')
+```
+
+### Route
 every route will be listed by 
 ```sh 
 app.get('\[route name\]', (req, res) => {
@@ -24,11 +47,20 @@ app.get('*', (req, res) => {
 })
 ```
 
+### Rendering
 if you want to return html, you can have a greet help by using ejs. the way to return response is by ``` res.render('[filename].ejs') ``` the render function will find the file wihtin the ```views/``` folder. example :
 
 ```sh
 app.get('/', (req, res) => {
     res.render('greet.ejs')
+})
+```
+
+But if you already set the ```view Engine``` you can exculde the file extension ```.ejs``` become like this
+
+```sh
+app.get('/', (req, res) => {
+    res.render('greet')
 })
 ```
 
@@ -66,5 +98,13 @@ ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was
         </strong>
     </li>
 <% }) %>
+ ```
+
+ ### Extending Template
+
+ Just the same as Blade ```@section``` . it work to extending the other template so we don't need to copy paste the same content for every view like ```header``` or ```footer```
+
+ ```sh
+ <%- include('filepath/filename.extension') %>
  ```
 

@@ -2,13 +2,16 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.use(express.static('public'))
+app.set('view engine', 'ejs')
+
 app.get('/', (req, res) => {
-    res.render('home.ejs')
+    res.render('home')
 })
 
 app.get('/greet/:name', (req, res) => {
     const {name} = req.params
-    res.render('greet.ejs',{name: name})
+    res.render('greet',{name: name})
 })
 
 app.get('/posts', (req, res) => {
