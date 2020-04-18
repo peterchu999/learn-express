@@ -1,9 +1,13 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 const port = 3000
+const friendList = ['example']
 
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
+
 
 app.get('/', (req, res) => {
     res.render('home')
@@ -21,6 +25,16 @@ app.get('/posts', (req, res) => {
         { title: 'Dementia', author: 'WHO' },
     ]
     res.render('posts.ejs', {posts: posts})
+})
+
+app.get('/friends', (req, res) => {
+    res.render('friend',{friends: friendList})
+})
+
+app.post('/friends', (req, res) => {
+    const {friend} = req.body
+    friendList.push(friend)
+    res.redirect('/friends')
 })
 
 app.listen(port, () => {

@@ -23,7 +23,8 @@ we can set our view engine within the app so we dont need to set write our file 
 app.set('view engine','[view engine name (in this case : "ejs")]')
 ```
 
-### Route
+### Routing
+
 every route will be listed by 
 ```sh 
 app.get('\[route name\]', (req, res) => {
@@ -45,6 +46,43 @@ never forget to make listen * at the very end of route. because the route readin
 app.get('*', (req, res) => {
     res.send('404 PAGE NOT FOUND')
 })
+```
+
+we can make a res or respond not only by sending message but we can me redirection to another / too here is the code example :
+
+```sh
+app.get('*', (req, res) => {
+    res.redirect('[path wanted we want]')
+})
+```
+
+to make post request we can access ```.post``` just like get. here is the example :
+
+```sh
+app.post('/post', (req, res) => {
+    res.redirect('[path wanted we want]')
+})
+```
+
+extracting the post body, before we get the post body. we need to include library the ```body-parser``` there is the explanation below. but after we added body-parser we can access our post req body like this :
+
+```sh
+app.post('/post', (req, res) => {
+    console.log(req.body)
+    res.redirect('[path wanted we want]')
+})
+```
+
+
+### Listen to user request
+
+we need to set up listen port to our user request. here is the code :
+
+```sh
+    app.listen(
+        [port number],
+        [ip address, but when we make local env it will be localhost(127.0.0.1)],
+        callbackfunction())
 ```
 
 ### Rendering
@@ -108,3 +146,20 @@ ejs was library in npm to install just neet to ``` npm i ejs --save ```. ejs was
  <%- include('filepath/filename.extension') %>
  ```
 
+## Body Parser
+ when working with post request node can't directly lookup the body of request we need to include ```body-parser``` library from npm
+
+ installation ``` npm i body-parser ```
+
+ set it in app.js config
+
+ ```sh
+const bodyParser = require("body-parser")
+app.use(bodyParser.urlencoded({extended: true}))
+ ```
+
+ so now we can read our request body like this example :
+
+ ```sh
+    const body = req.body
+ ```
