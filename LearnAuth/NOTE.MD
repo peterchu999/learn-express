@@ -146,7 +146,7 @@ app.get('/logout', (req, res) => {
 ``
 
 
-## middleware
+## Middleware
 
 we can make our own middleware like making usual function. it takes 3 params : `req` , `res` , `next`. and in this case we can check if our user was logged in or not by accessing ``req.isAuthenticated()``. and the code look like this:
 
@@ -163,7 +163,7 @@ const isLoggedIn = (req, res, next) => {
 and this middleware just work like laravel ->auth() middleware. all we nedd to do was include this function in the middle of our route like this :
 
 ``sh
-app.get('/secret',```isLoggedIn``` ,(req, res) => {
+app.get('/secret', isLoggedIn ,(req, res) => {
     res.send("Sitll Learrning Broo")
 })
 ``
