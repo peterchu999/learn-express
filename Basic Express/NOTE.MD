@@ -163,3 +163,13 @@ app.use(bodyParser.urlencoded({extended: true}))
  ```sh
     const body = req.body
  ```
+
+ ### Form Override Method
+ In Express, include library ```method-override``` so we can change the method of form by adding a ```urlParam``` on the action the urlParam was ```?_method=PUT``` Even though the method was `POST` it will take as a `PUT`
+
+ But Before we can just add the urlParams we need to configure the express using method override. here is the script to configure
+
+ ```sh
+ const methodOverride = require('method-override')
+ app.use(methodOverride('_method'))
+ ```

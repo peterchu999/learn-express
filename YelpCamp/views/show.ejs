@@ -1,0 +1,32 @@
+<%- include('partials/header.ejs') %>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4"><%= campground.name %></h1>
+            <img style="max-height: 400px;" class="img-fluid" src="<%= campground.image %>" alt="<%= campground.name %>.jpg">
+            <hr class="my-4">
+            <p>
+                <%= campground.description %>
+            </p>
+        </div>
+        <h2>Comments</h2>
+        <table class="table">
+            <tbody>
+            <% campground.comments.forEach(comment => {%>
+              <tr>
+                <th scope="row"><%= comment.author %></th>
+                <td><%= comment.text %></td>
+              </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        <form action="/campgrounds/<%= campground.id %>/comments" method="POST">
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="commentInput" name="comment">
+              </div>
+              <button class="btn btn-warning" type="submit">Comment</button>
+            </div>
+        </form>
+        <a href="/campgrounds" class="btn btn-secondary mt-4"> Go back</a>
+    </div>
+<%- include('partials/footer.ejs') %>

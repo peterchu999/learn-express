@@ -1,0 +1,24 @@
+<%- include('partials/header.ejs') %>
+<div class="container">
+    <header class="jumbotron">
+        <h1>Add New Camp</h1>
+        <p>Let us know ur camps</p>
+        <a class="btn btn-primary btn-lg my-1" href="/campgrounds">Back to CampGround list</a>
+    </header>
+    <form action="/campgrounds" method="POST">
+        <div class="form-group">
+          <label for="campName">Camp name</label>
+          <input name="campName" type="text" class="form-control" id="campName" aria-describedby="campName" placeholder="ex: everest">
+        </div>
+        <div class="form-group">
+          <label for="campImg">Image URL</label>
+          <input name="campImg" type="text" class="form-control" id="campImg" placeholder="https://image.com">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input name="description" type="text" class="form-control" id="description" placeholder="Lorem Ipsum Dolor Sit Amet">
+          </div>
+        <button type="submit" class="btn btn-primary">Add Camp</button>
+      </form>
+</div>
+<%- include('partials/footer.ejs') %>
