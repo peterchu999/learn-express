@@ -163,7 +163,7 @@ const isLoggedIn = (req, res, next) => {
 and this middleware just work like laravel ->auth() middleware. all we nedd to do was include this function in the middle of our route like this :
 
 ``sh
-app.get('/secret',`isLoggedIn` ,(req, res) => {
+app.get('/secret',```isLoggedIn``` ,(req, res) => {
     res.send("Sitll Learrning Broo")
 })
 ``
