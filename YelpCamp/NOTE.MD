@@ -174,7 +174,8 @@ modelClass.findByIdAndUpdate(id, data, (res, data) => {
 
 To `delete` we can use `.findByIdAndRemove` quite the same with update , But this code only take 2 params which is `id`, and `callbackfunc` .
 
-```jsmodelClass.findByIdAndRemove(id, data, (res) => {
+```js
+modelClass.findByIdAndRemove(id, data, (res) => {
     if (err) {
         //do something when error
     } else {
@@ -293,7 +294,7 @@ User.findOne({name: "giruvegan"}, (err, user) => {
 
 it will produce :
 
-```js
+```json
 {
     _id : 0980980980,
     name: "giruvegan",
