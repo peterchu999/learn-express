@@ -54,7 +54,7 @@ app.use(passport.session())
 
 the  we need to use `express-session` :
 
-```sh
+```javascript
 app.use(require('express-session')({
     secret: "[some text]", // will be used to decode and encode session
     resave: false,
@@ -76,7 +76,7 @@ the ``User`` come from our userModel as for the serialize and deserialize functi
 ## Register
 let assume the route to register is `/register` with `POST` method.
 
-```sh
+```javascri[t
 app.post('/register', (req, res) => {
     const {username, password} = req.body  // getting input from body
     User.register(
