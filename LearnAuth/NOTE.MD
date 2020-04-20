@@ -54,7 +54,7 @@ app.use(passport.session())
 
 the  we need to use `express-session` :
 
-```sh
+```javascript
 app.use(require('express-session')({
     secret: "[some text]", // will be used to decode and encode session
     resave: false,
