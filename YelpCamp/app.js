@@ -1,10 +1,16 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
+const passportLocalMongoose = require('passport-local-mongoose')
+const expressSession = require('express-session')
 const app = express()
 const port = 3000
 
+const viewRouter = require('./route/view')
+
+const User = require('./models/user')
 const Campground = require('./models/campground')
 const Comment = require('./models/comment')
 mongoose.connect('mongodb://localhost/yelp_camp', {useNewUrlParser: true,  useUnifiedTopology: true })
@@ -12,10 +18,13 @@ mongoose.connect('mongodb://localhost/yelp_camp', {useNewUrlParser: true,  useUn
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use(passport.initialize())
+app.use(passport.session())
 
-app.get('/', (req, res) => {
-    res.render('landing')
-})
+passport.deserializeUser(User.deserializeUser())
+passport.serializeUser(User.serializeUser())
+
+app.use('/',viewRouter)
 
 app.get('/campgrounds', (req, res) => {
     Campground.find({}, (err, datas) => {
@@ -81,6 +90,11 @@ app.post('/campgrounds/:id/comments', (req, res) => {
     res.redirect(`/campgrounds/${id}`)
 })
 
-app.listen(3000, () => {
+//Auth Route
+app.get('/login', (req, res) => {
+
+})
+
+app.listen(port, () => {
     console.log(`Starting server at http://localhost:${port}`)
 })
