@@ -2,4 +2,9 @@
 
 <li><a href="/login">Login</a></li>
 <li><a href="/register">Register</a></li>
+
+
+<% if (user != null) {%>
+<h4>Hello <%= user.username %></h4>
 <li><a href="/logout">Log Out</a></li>
+<% }%>

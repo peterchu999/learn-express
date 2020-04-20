@@ -36,8 +36,14 @@ const isLoggedIn = (req, res, next) => {
 //===================
 //ROUTE
 //===================
+app.get('/api', (req,res) => {
+    res.status(200).json({
+        name: 'developer',
+        user: req.isAuthenticated()
+    })
+})
 app.get('/',(req, res) => {
-    res.render('home')
+    res.render('home',{user: req.user})
 })
 
 app.get('/secret',isLoggedIn ,(req, res) => {

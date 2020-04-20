@@ -167,3 +167,13 @@ app.get('/secret', isLoggedIn ,(req, res) => {
     res.send("Sitll Learrning Broo")
 })
 ``
+
+we can get our Logged in user data by accessing ``req.user``, it will return the user ``id`` and ``username`` in our case. But if there are no user who is loggedin then the ``req.user`` value would be ``undefined``.
+
+```sh
+app.get('/',(req, res) => {
+    res.render('home',{user: req.user})
+})
+```
+
+
