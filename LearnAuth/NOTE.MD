@@ -76,7 +76,7 @@ the ``User`` come from our userModel as for the serialize and deserialize functi
 ## Register
 let assume the route to register is `/register` with `POST` method.
 
-```sh
+```javascri[t
 app.post('/register', (req, res) => {
     const {username, password} = req.body  // getting input from body
     User.register(
