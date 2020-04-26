@@ -446,3 +446,45 @@ and using it in the code by accessing `process.env` object :
 app.listen(process.env.[var-name])
 ```
 
+
+### Persistent User Login
+
+In the first we use express session to determine if our user is loggedin or not. but every time we restart the server the logged In status or the express session have been reset so we neet to store the session data to our db ussing `connect-mongo`
+
+```sh
+//terminal
+npm i connect-mongo
+```
+
+then use it in our code :
+
+```js
+//app.js
+
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+
+app.use(expressSession({
+    secret: '[your secret string]',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+}))
+
+```
+
+after this every time we reset our server the user still loggedin. here is one configuration that might be come to handy. By default be will store the user data for 14 days, that means after user unactive for 14 days they will be automatically loggout. here is the trick if you want to configure it
+
+```js
+app.use(expressSession({
+    secret: '[your secret string]',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection,
+        ttl: 14 * 24 * 60 * 60 //here is the default 14 days
+    })
+}))
+```
+
+for more reference [connect-mongo](https://github.com/jdesboeufs/connect-mongo)

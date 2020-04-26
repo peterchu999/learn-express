@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -15,7 +16,9 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  },
   "scripts": {
     "start": "node app.js",
     "serve": "nodemon app.js",
