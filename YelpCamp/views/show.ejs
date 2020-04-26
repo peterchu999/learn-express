@@ -7,14 +7,29 @@
             <p>
                 <%= campground.description %>
             </p>
+            <em> Submmited by : <%= campground.author.username%> </em><br>
+            <% if (isAuthor) { %>
+            <a class="btn btn-warning mt-4" href="/campgrounds/<%= campground.id %>/edit"> Edit Post</a>
+            <form class="d-inline-block" action="/campgrounds/<%= campground.id %>?_method=DELETE" method="POST"> <button class="btn btn-danger mt-4" type="submit">Delete</button> </form>
+            <% } %>
         </div>
         <h2>Comments</h2>
         <table class="table">
             <tbody>
             <% campground.comments.forEach(comment => {%>
-              <tr>
-                <th scope="row"><%= comment.author %></th>
-                <td><%= comment.text %></td>
+              <tr class="p-1">
+                <td class="w-75">
+                  <h6 class="my-1 p-0"><%= comment.author.username %></h6>
+                  <p class="m-0 p-0"> <%= comment.text %></p>
+                </td>
+                <td class="w-25 text-center">
+                  <% if (comment.author.id.equals(currentUser.id)){%>
+                  <a href="/campgrounds/<%= campground.id %>/comments/<%= comment.id %>/edit" class="btn btn-xs btn-warning">Edit</a>
+                  <form action="/campgrounds/<%= campground.id %>/comments/<%= comment.id %>?_method=DELETE " class="d-inline" method="POST">
+                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                  </form>
+                  <%}%>
+                </td>
               </tr>
             <% }) %>
             </tbody>
@@ -22,9 +37,9 @@
         <form action="/campgrounds/<%= campground.id %>/comments" method="POST">
             <div class="form-group row">
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="commentInput" name="comment">
+                <input type="text" class="form-control" id="commentInput" name="comment" required>
               </div>
-              <button class="btn btn-warning" type="submit">Comment</button>
+              <button class="btn btn-info" type="submit">Comment</button>
             </div>
         </form>
         <a href="/campgrounds" class="btn btn-secondary mt-4"> Go back</a>

@@ -294,7 +294,7 @@ User.findOne({name: "giruvegan"}, (err, user) => {
 
 it will produce :
 
-```json
+```js
 {
     _id : 0980980980,
     name: "giruvegan",
@@ -400,4 +400,49 @@ const router = express.Router(); // instead of this
 const router = express.Router({mergeParams: true}); // make this
 ```
 
+## Flash Message
+
+flash message is a one time message. let say you try to login an you input the wrong password, the page with load the error message. But not every time you try to login the message shows up. this is where `connect-flash` library come to handy.
+
+#### Set Up
+to set up we need to import and use it in our apps
+
+```js
+const flash = require('flash-connect')
+app.use(flash())
+```
+
+### Usage
+Let say we want our error message shows up when user want to access the route that need login.
+
+```js
+// route.js
+router.get('/', (req, res) => {
+    req.flash('[key-value]': '[message]')
+    res.render('[template]', {message: req.flash('[key-value]')})
+})
+```
+
+so the message will be filled if there is a error
+
+
+### ENV Varible in node js
+
+you can use a env varibale by using this command on CLI
+
+```sh
+export [var-name]=[VALUE]
+```
+
+if you're using heroku
+
+```sh
+heroku config:set [var-name]=[VALUE]
+```
+
+and using it in the code by accessing `process.env` object :
+
+```js
+app.listen(process.env.[var-name])
+```
 

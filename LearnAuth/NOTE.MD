@@ -45,14 +45,7 @@ UserSchema.plugin(passportLocalMongoose)
 module.exports = mongoose.model('User', UserSchema)
 ```
 
-now we need to set up the passport in our app.js by using this 2 code:
-
-```sh
-app.use(passport.initialize())
-app.use(passport.session())
-```
-
-the  we need to use `express-session` :
+we need to use `express-session` by following code :
 
 ```javascript
 app.use(require('express-session')({
@@ -61,6 +54,16 @@ app.use(require('express-session')({
     saveUnitialize: false
 }))
 ```
+
+now we need to set up the passport in our app.js by using this 2 code, be sure to add `express-session` before this code otherwise it will result in
+`undebugable` error:
+
+```sh
+app.use(passport.initialize())
+app.use(passport.session())
+```
+
+
 
 so passport will want to read or write the data in the session. in this case we will store our User data in the session
 to set it up we need this 2 line of code :
@@ -76,7 +79,7 @@ the ``User`` come from our userModel as for the serialize and deserialize functi
 ## Register
 let assume the route to register is `/register` with `POST` method.
 
-```javascri[t
+```javascript
 app.post('/register', (req, res) => {
     const {username, password} = req.body  // getting input from body
     User.register(
@@ -97,7 +100,7 @@ app.post('/register', (req, res) => {
 
 User.register was the function made by `passport-local-mongoose` and it take 2 params :
 
-```sh
+```js
 User.register(
     new User([insert all user attribute expect password]),
     password,
@@ -109,9 +112,9 @@ User.register(
 
 ## Login
 
-let assume the route to register is `/login` with `POST` method.
+let assume the route to login is `/login` with `POST` method.
 
-```sh
+```js
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/secret',
     failureRedirect: '/login'
@@ -121,7 +124,7 @@ app.post('/login', passport.authenticate('local', {
 
 we usually never have the third param in the app.post or get. now there is ``passport.authenticate`` which work as the middleware. and actually we can make our own middleware, just put it in the middle of path and callback func.
 
-```sh
+```js
 passport.authenticate('local', {
     successRedirect: '/secret',
     failureRedirect: '/login'
@@ -175,5 +178,18 @@ app.get('/',(req, res) => {
     res.render('home',{user: req.user})
 })
 ```
+
+##  Function that call on every route
+
+in this case if you want all route get the ``user`` data you need to add ``req.user`` to every single route so that your tempalate can use it.
+but here is solution we make a function (middleware) that called on every single route :
+
+```js
+app.use((req, res, next) => {
+    res.locals.userData = req.user
+    next() // go to next middleware (most cases route handler)
+})
+```
+``res.local`` make what ever inside the `locals` available on every template in this case if our template need an user data they can simply access `userData`
 
 

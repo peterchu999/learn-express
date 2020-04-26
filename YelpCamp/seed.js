@@ -48,21 +48,21 @@ const seedCampAndComment = (async () => {
             if (err) {
                 console.log(`camp: ${err}`)
             } else {
-                comment.create({
-                    text: 'Great',
-                    author: `${camp.name}`
-                }, (err, comment) => {
-                    if (err) {
-                        console.log(`comment: ${err}`)
-                    } else {
-                        createdCamp.comments.push(comment)
-                        createdCamp.save((err) => {
-                            if (err) {
-                                console.log(`failed to save ${err}`)
-                            }
-                        })
-                    }
-                })
+                // comment.create({
+                //     text: 'Great',
+                //     author: `${camp.name}`
+                // }, (err, comment) => {
+                //     if (err) {
+                //         console.log(`comment: ${err}`)
+                //     } else {
+                //         createdCamp.comments.push(comment)
+                //         createdCamp.save((err) => {
+                //             if (err) {
+                //                 console.log(`failed to save ${err}`)
+                //             }
+                //         })
+                //     }
+                // })
             }
         })
     })
