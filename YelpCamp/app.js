@@ -61,6 +61,8 @@ app.use('/', authRouter)
 app.use('/campgrounds', isLoggedIn, campgroundRouter)
 app.use('/campgrounds/:id/comments', isLoggedIn, commentRouter)
 
+app.use('/notify', notifyRouter)
+
 app.listen(port, () => {
-    console.log(`Starting server at ${ip}:${port}3`)
+    console.log(`Starting server at ${ip}:${port}`)
 })

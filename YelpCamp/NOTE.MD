@@ -1,38 +1,39 @@
 # Note When Taking YelpCamp Lesson
 
 ## Mongo DB
+
 Mongo Db is NoSQL data base which means me don't need to define table structure. it's can have flexible data
 
 ### Installation and run
+
 just visit this link : https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
-
 ### syntax and terminology
-Open the terminal and run ```mongo``` then your terminal will become mongo shell.
 
-To show your available db use syntax ```show dbs``` and it will show the DB
+Open the terminal and run `mongo` then your terminal will become mongo shell.
 
-to use one of the db use ```use [db-name]``` then you can manipulate the DB
+To show your available db use syntax `show dbs` and it will show the DB
+
+to use one of the db use `use [db-name]` then you can manipulate the DB
 
 NoSQL have this data collection structure. it means you can store several data within 1 DB. for Example :
 
-you have DB with name ```Project1```, the project 1 can have several collection of data to we can define them by inserting data using this syntax ```insert```
+you have DB with name `Project1`, the project 1 can have several collection of data to we can define them by inserting data using this syntax `insert`
 
 ```js
- db.[name-of-collection].insert({
-     attribute1: value, 
-     attribute2:value
-     })
+db[name - of - collection].insert({
+  attribute1: value,
+  attribute2: value,
+});
 ```
 
-to show what collection did we have on the db use ```show collections``` syntax
+to show what collection did we have on the db use `show collections` syntax
 
-to show the data all data within we use ```db.[collection-name].find()```
+to show the data all data within we use `db.[collection-name].find()`
 
-to show the data with spesific attribute we can include in find like this ```db.[collection-name].find({attribute:value}) ```
+to show the data with spesific attribute we can include in find like this `db.[collection-name].find({attribute:value}) `
 
-
-to update we can use update syntax ```db.[collection-name].update({attribute1},{attribute2})``` the attribute 1 is for find, we need to find the data and then update it. second attribute is the new attribute we want to that data. in this case the new attribute will override the old one. let make this example, this is the data at first
+to update we can use update syntax `db.[collection-name].update({attribute1},{attribute2})` the attribute 1 is for find, we need to find the data and then update it. second attribute is the new attribute we want to that data. in this case the new attribute will override the old one. let make this example, this is the data at first
 
 ```js
     {
@@ -43,7 +44,7 @@ to update we can use update syntax ```db.[collection-name].update({attribute1},{
     }
 ```
 
-then we run the syntax to update it ```db.[collection-name].update({name: "person"},{age: 22})``` it will override the data completly and become like this :
+then we run the syntax to update it `db.[collection-name].update({name: "person"},{age: 22})` it will override the data completly and become like this :
 
 ```js
     {
@@ -52,10 +53,9 @@ then we run the syntax to update it ```db.[collection-name].update({name: "perso
     }
 ```
 
-if you just want to override 1 attribute or add a new one we can use ```$set:```. for example ```db.[collection-name].update({name: "person"},{$set:{age: 22, isHuman: true}})```
+if you just want to override 1 attribute or add a new one we can use `$set:`. for example `db.[collection-name].update({name: "person"},{$set:{age: 22, isHuman: true}})`
 
 it will change our data to become like this :
-
 
 ```js
     {
@@ -66,22 +66,24 @@ it will change our data to become like this :
         isHuman: true
     }
 ```
-to delete or remove data we use the keyword ```db.[collection-name].remove({attribute:value})``` it will remove all the data that have the attribute.
 
+to delete or remove data we use the keyword `db.[collection-name].remove({attribute:value})` it will remove all the data that have the attribute.
 
-Drop database ```db.[collection-name].drop()``` will drop your data
-
+Drop database `db.[collection-name].drop()` will drop your data
 
 ## mongoDB in Code (Mongoose)
+
 we use mongoose to connect our code with DB. first we need to install mongoose using :
 
-``` npm i mongoose ```
+`npm i mongoose`
 
-then set up the mongoose by connecting to db : 
+then set up the mongoose by connecting to db :
 
 ```js
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/[database_name]', {useNewUrlParser: true })
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/[database_name]", {
+  useNewUrlParser: true,
+});
 ```
 
 make the schema :
@@ -98,19 +100,23 @@ here is the reference of schema type [mongoose-Schematypes](https://mongoosejs.c
 then make the model. to make the model class here is the code :
 
 ```js
-const modelClass = mongoose.model(["your collection name in singular version"],schemaInstancce )
+const modelClass = mongoose.model(
+  ["your collection name in singular version"],
+  schemaInstancce
+);
 ```
+
 ### CRUD
 
 To `create` just like laravel we need create new model instance and save it
 
 ```js
 const name = new modelClass({
-    attribute: value
-})
+  attribute: value,
+});
 ```
 
-then we can save it like laravel using ```.save```, but here we nned to include the callback fucntion to handling if some error happen
+then we can save it like laravel using `.save`, but here we nned to include the callback fucntion to handling if some error happen
 
 ```js
 name.save((err, nameItem) => {
@@ -123,7 +129,7 @@ name.save((err, nameItem) => {
 })
 ```
 
-OR if you are lazy to create name then save it. we can use ```.create``` function like this :
+OR if you are lazy to create name then save it. we can use `.create` function like this :
 
 ```js
 modelClass.create({
@@ -138,8 +144,7 @@ modelClass.create({
 })
 ```
 
-
-To ```read``` to Read or Show the data we can use the method ```.find``` just like before we need to include the callback func to handling the data
+To `read` to Read or Show the data we can use the method `.find` just like before we need to include the callback func to handling the data
 
 ```js
 modelClass.find({
@@ -156,11 +161,10 @@ modelClass.find({
 we can also find using the unique id generated by the mongo system.
 
 ```js
-modelClass.findById(id, callbackfunc())
+modelClass.findById(id, callbackfunc());
 ```
 
 To `update` we can use `.findByIdAndUpdate` which will taje 3 parameter, which is : `id`, `newData` and `callbackfunc`. here is the code example of how using it
-
 
 ```js
 modelClass.findByIdAndUpdate(id, data, (res, data) => {
@@ -185,31 +189,34 @@ modelClass.findByIdAndRemove(id, data, (res) => {
 ```
 
 ### Data Associations
+
 Relationship in mongoose
 
 #### Embed Data & Object reference
-Up till now we just working with primitive Data type in the model. now if we want to have realtionship on our Db we must set it in schema. at this case let assume we have `User` and `Post` collection on monggo db and we want that 1 user can have many post (1..*).
+
+Up till now we just working with primitive Data type in the model. now if we want to have realtionship on our Db we must set it in schema. at this case let assume we have `User` and `Post` collection on monggo db and we want that 1 user can have many post (1..\*).
 
 now set up the Schema and Model:
 
 Post Schema & Model
+
 ```js
 const postSchema = new mongoose.Schema({
-    title: String,
-    content: String
-})
-const Post = mongoose.model('Post', postSchema)
+  title: String,
+  content: String,
+});
+const Post = mongoose.model("Post", postSchema);
 ```
 
-
 User Schema & Model
+
 ```js
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    posts: [postSchema]
-})
-const User = mongoose.model('User', userSchema)
+  name: String,
+  email: String,
+  posts: [postSchema],
+});
+const User = mongoose.model("User", userSchema);
 ```
 
 To test our data realtionship we can try to add user with post
@@ -230,7 +237,7 @@ user.posts.push({
 user.save((err, user) => {
     if (err) {
         // do something Error
-    } else { 
+    } else {
         // user fetch do something
     }
 })
@@ -239,57 +246,61 @@ user.save((err, user) => {
 
 but if we do it this way the user have the posts, but the posts itself doesn't really inserted. that why we might want to use reference.
 
-So instead of having ```posts:[postSchem]``` we will refactor it so it contain's the reference of the `Post`.
+So instead of having `posts:[postSchem]` we will refactor it so it contain's the reference of the `Post`.
 
 User Schema & Model
+
 ```js
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Post" // just the same with our modelParams name
-        }
-    ]
-})
-const User = mongoose.model('User', userSchema)
+  name: String,
+  email: String,
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post", // just the same with our modelParams name
+    },
+  ],
+});
+const User = mongoose.model("User", userSchema);
 ```
 
-now we can't just push usual Object to the `posts` we need to push a post here is the example. Assuming we already make user in our db with ``name: "giruvegan"``
+now we can't just push usual Object to the `posts` we need to push a post here is the example. Assuming we already make user in our db with `name: "giruvegan"`
 
 ```js
-Post.create({
-    title: 'tips Slaying',
-    content: 'use thief cuff or sage ring'
-}, (err, post) => {
+Post.create(
+  {
+    title: "tips Slaying",
+    content: "use thief cuff or sage ring",
+  },
+  (err, post) => {
     if (err) {
-        // handling err
+      // handling err
     } else {
-        User.findOne({name: "giruvegan"}, (err, user) => {
-            if (err) {
-                // handling error
-            } else {
-                user.posts.push(post)
-                user.save((err, user) => {
-                    //Err handling/ Data 
-                })
-            }
-        })
+      User.findOne({ name: "giruvegan" }, (err, user) => {
+        if (err) {
+          // handling error
+        } else {
+          user.posts.push(post);
+          user.save((err, user) => {
+            //Err handling/ Data
+          });
+        }
+      });
     }
-})
+  }
+);
 ```
 
 After we set User and Post Realtion using Object Reference. there is something that different. try to find the user like this :
 
 ```js
-User.findOne({name: "giruvegan"}, (err, user) => {
-    if (err) {
-        // handling error
-    } else {
-        console.log(user)
-    }
-})
+User.findOne({ name: "giruvegan" }, (err, user) => {
+  if (err) {
+    // handling error
+  } else {
+    console.log(user);
+  }
+});
 ```
 
 it will produce :
@@ -306,15 +317,15 @@ it will produce :
 see posts contains the objectId of post instead of the data. what if we want it to return not just thee objectId but the data too. `populate` come to handy, populate was the extended function of find. here is how we use populate
 
 ```js
-User.findOne({name: "giruvegan"})
-    .populate('posts')
-    .exec((err, user) => {
-        if (err) {
-            // handling error
-        } else {
-            console.log(user)
-        }
-})
+User.findOne({ name: "giruvegan" })
+  .populate("posts")
+  .exec((err, user) => {
+    if (err) {
+      // handling error
+    } else {
+      console.log(user);
+    }
+  });
 ```
 
 it will produce :
@@ -332,48 +343,47 @@ it will produce :
 }
 ```
 
-
-
 ## Express Sanitizer
+
 sanitize was use to delete malicious script that embbed to our input. to use sanitizer we need to install it `npm i express-sanitizer` . then config it
 
 ```js
-const expressSanitizer = require('express-sanitizer')
-app.use(expressSanitizer())
+const expressSanitizer = require("express-sanitizer");
+app.use(expressSanitizer());
 ```
 
 then how to use it the actual input ? . Here is the Example
 
 ```js
-app.post('/posts', (req, res) => {
-    console.log(req.body.name) // still have script tag
-    req.body.name = req.sanitize(req.body.name)
-    console.log(req.body.name) // script tag is gone
-})
+app.post("/posts", (req, res) => {
+  console.log(req.body.name); // still have script tag
+  req.body.name = req.sanitize(req.body.name);
+  console.log(req.body.name); // script tag is gone
+});
 ```
 
-
 ## Express Router
+
 we can define our own router in seperate file. to keep our app.js clean. just need this template configure
 
 ```javascript
 // asume route.js
 
-const express = require('express')
+const express = require("express");
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('landing')
-}) // just like how
+router.get("/", (req, res) => {
+  res.render("landing");
+}); // just like how
 
-module.exports = router
+module.exports = router;
 ```
 
 and how we use it in the app.js was like this
 
 ```js
-const router = require('filepath/route.js')
-app.use('/',router) // the / was base params and can be change to anything
+const router = require("filepath/route.js");
+app.use("/", router); // the / was base params and can be change to anything
 ```
 
 the base params was set at the `app.use` so in the `router.js` we can just have the `subPath`
@@ -381,23 +391,23 @@ now comes an issue. what if me want the `base` params in the `app.use()` to cont
 
 ```js
 //app.js
-const router = require('filepath/route.js')
-app.use('/posts/:id',router) 
+const router = require("filepath/route.js");
+app.use("/posts/:id", router);
 ```
 
 and in the `route.js`
 
 ```javascript
-router.post('/' , (req, res) => {
-    console.log(req.params.id) // it will return null
-})
+router.post("/", (req, res) => {
+  console.log(req.params.id); // it will return null
+});
 ```
 
 we need to configure something so that our own router can access the `basePath` params. it is setting the mergerParams.
 
 ```js
 const router = express.Router(); // instead of this
-const router = express.Router({mergeParams: true}); // make this
+const router = express.Router({ mergeParams: true }); // make this
 ```
 
 ## Flash Message
@@ -405,26 +415,27 @@ const router = express.Router({mergeParams: true}); // make this
 flash message is a one time message. let say you try to login an you input the wrong password, the page with load the error message. But not every time you try to login the message shows up. this is where `connect-flash` library come to handy.
 
 #### Set Up
+
 to set up we need to import and use it in our apps
 
 ```js
-const flash = require('flash-connect')
-app.use(flash())
+const flash = require("flash-connect");
+app.use(flash());
 ```
 
 ### Usage
+
 Let say we want our error message shows up when user want to access the route that need login.
 
 ```js
 // route.js
-router.get('/', (req, res) => {
-    req.flash('[key-value]': '[message]')
-    res.render('[template]', {message: req.flash('[key-value]')})
-})
+router.get("/", (req, res) => {
+  req.flash(("[key-value]": "[message]"));
+  res.render("[template]", { message: req.flash("[key-value]") });
+});
 ```
 
 so the message will be filled if there is a error
-
 
 ### ENV Varible in node js
 
@@ -446,7 +457,6 @@ and using it in the code by accessing `process.env` object :
 app.listen(process.env.[var-name])
 ```
 
-
 ### Persistent User Login
 
 In the first we use express session to determine if our user is loggedin or not. but every time we restart the server the logged In status or the express session have been reset so we neet to store the session data to our db ussing `connect-mongo`
@@ -461,30 +471,37 @@ then use it in our code :
 ```js
 //app.js
 
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
-app.use(expressSession({
-    secret: '[your secret string]',
+app.use(
+  expressSession({
+    secret: "[your secret string]",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({mongooseConnection: mongoose.connection})
-}))
-
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
 ```
 
 after this every time we reset our server the user still loggedin. here is one configuration that might be come to handy. By default be will store the user data for 14 days, that means after user unactive for 14 days they will be automatically loggout. here is the trick if you want to configure it
 
 ```js
-app.use(expressSession({
-    secret: '[your secret string]',
+app.use(
+  expressSession({
+    secret: "[your secret string]",
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
-        mongooseConnection: mongoose.connection,
-        ttl: 14 * 24 * 60 * 60 //here is the default 14 days
-    })
-}))
+      mongooseConnection: mongoose.connection,
+      ttl: 14 * 24 * 60 * 60, //here is the default 14 days
+    }),
+  })
+);
 ```
 
 for more reference [connect-mongo](https://github.com/jdesboeufs/connect-mongo)
+
+# Heroku
+
+use `heroku login -i` for interactive or else you'll be waiting the cli processing

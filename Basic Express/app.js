@@ -1,13 +1,19 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const port = 3000
+const port = 8000
 const axios = require('axios')
 const friendList = ['example']
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
+
+
+app.get('/data', (req, res) => {
+    console.log('kick')
+    res.json({name: 'peter', age: 23})
+})
 
 
 app.get('/', (req, res) => {
@@ -49,6 +55,6 @@ app.get('/movie/:name', async (req, res) => {
     res.send(view)
 })
 
-app.listen(port, () => {
+app.listen(port,'127.0.0.1',() => {
     console.log(`server is starting at port ${port}`)
 })
